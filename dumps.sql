@@ -80,7 +80,6 @@ INSERT INTO PATIENTLOGS VALUES(1, STR_TO_DATE('4,3,2020', '%d,%m,%Y'), 500);
 SELECT MONTHNAME(APPOINTMENT) AS MONTH, ACCOUNTID, COUNT(DISTINCT PATIENTID) AS no_of_unique_patients FROM PATIENTLOGS GROUP BY MONTH, ACCOUNTID ORDER BY no_of_unique_patients DESC, ACCOUNTID ASC
 
 -- w/ the limit per group condition enforced but syntax fuckery arrghhh
-/*
 --v1
 SELECT * FROM (SELECT MONTHNAME(APPOINTMENT) AS MONTH, ACCOUNTID, COUNT(DISTINCT PATIENTID) AS no_of_unique_patients, row_number() over (partition by MONTH ORDER BY no_of_unique_patients DESC) AS altcolumn FROM PATIENTLOGS) AS alttable WHERE altcolumn <= 2 ;
 
@@ -104,4 +103,4 @@ FROM
    alttable
 WHERE 
    row_num <= 2;
-*/
+
